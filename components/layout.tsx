@@ -74,8 +74,8 @@ export function Layout({ children }: LayoutProps) {
             <NavItem href="/pos" icon={<ShoppingCart className="w-4 h-4" />} collapsed={collapsed}>
               POS
             </NavItem>
-            <NavItem href="/items" icon={<Package className="w-4 h-4" />} collapsed={collapsed}>
-              Items
+            <NavItem href="/inventory" icon={<Package className="w-4 h-4" />} collapsed={collapsed}>
+              Inventory
             </NavItem>
             <NavItem href="/orders" icon={<ClipboardList className="w-4 h-4" />} collapsed={collapsed}>
               Orders

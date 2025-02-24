@@ -44,8 +44,8 @@ export function MobileNav({ className }: MobileNavProps) {
             <NavItem href="/pos" onClick={() => setOpen(false)}>
               POS
             </NavItem>
-            <NavItem href="/items" onClick={() => setOpen(false)}>
-              Items
+            <NavItem href="/inventory" onClick={() => setOpen(false)}>
+              Inventory
             </NavItem>
             <NavItem href="/orders" onClick={() => setOpen(false)}>
               Orders

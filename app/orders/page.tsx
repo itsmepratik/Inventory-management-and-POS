@@ -16,43 +16,55 @@ export default function OrdersPage() {
 
   return (
     <Layout>
-      <div className="space-y-4 max-w-[100vw] overflow-hidden">
+      <div className="space-y-4 w-full">
         {/* Header section */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <h1 className="text-2xl font-semibold">All orders</h1>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" className="w-full sm:w-auto text-sm">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <Button variant="outline" className="flex-1 sm:flex-none text-[clamp(0.8rem,3vw,0.875rem)]">
               Export
             </Button>
-            <Button className="w-full sm:w-auto text-sm">Create Order</Button>
+            <Button className="flex-1 sm:flex-none text-[clamp(0.8rem,3vw,0.875rem)]">
+              Create Order
+            </Button>
           </div>
         </div>
 
         {/* Tabs - scrollable on all screen sizes */}
-        <ScrollArea className="w-full whitespace-nowrap">
+        <ScrollArea className="w-full pb-2">
           <Tabs defaultValue="all" className="w-max">
-            <TabsList>
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
-              <TabsTrigger value="completed">Completed</TabsTrigger>
-              <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
+            <TabsList className="h-9">
+              <TabsTrigger value="all" className="text-[clamp(0.8rem,3vw,0.875rem)] px-3">All</TabsTrigger>
+              <TabsTrigger value="active" className="text-[clamp(0.8rem,3vw,0.875rem)] px-3">Active</TabsTrigger>
+              <TabsTrigger value="scheduled" className="text-[clamp(0.8rem,3vw,0.875rem)] px-3">Scheduled</TabsTrigger>
+              <TabsTrigger value="completed" className="text-[clamp(0.8rem,3vw,0.875rem)] px-3">Completed</TabsTrigger>
+              <TabsTrigger value="cancelled" className="text-[clamp(0.8rem,3vw,0.875rem)] px-3">Cancelled</TabsTrigger>
             </TabsList>
           </Tabs>
         </ScrollArea>
 
         {/* Filters - responsive layout */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Input placeholder="Search" className="w-full max-w-sm" />
-            <Button variant="outline" size="sm" className="ml-2 sm:hidden" onClick={toggleFilters}>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <div className="flex-1 max-w-[calc(100%-4.5rem)] sm:max-w-sm">
+              <Input
+                placeholder="Search"
+                className="w-full text-[clamp(0.8rem,3vw,0.875rem)]"
+              />
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="sm:hidden whitespace-nowrap text-[clamp(0.8rem,3vw,0.875rem)]"
+              onClick={toggleFilters}
+            >
               Filters
-              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${isFilterExpanded ? "rotate-180" : ""}`} />
+              <ChevronDown className={`ml-2 h-3 w-3 transition-transform ${isFilterExpanded ? "rotate-180" : ""}`} />
             </Button>
           </div>
-          <div className={`flex flex-wrap gap-2 ${isFilterExpanded ? "" : "hidden sm:flex"}`}>
+          <div className={`grid grid-cols-2 sm:flex flex-wrap gap-2 ${isFilterExpanded ? "" : "hidden sm:grid sm:flex"}`}>
             <Select>
-              <SelectTrigger className="w-[clamp(120px,calc(50%-0.5rem),200px)]">
+              <SelectTrigger className="w-full sm:w-[clamp(120px,15vw,200px)] text-[clamp(0.8rem,3vw,0.875rem)]">
                 <SelectValue placeholder="Date range" />
               </SelectTrigger>
               <SelectContent>
@@ -64,7 +76,7 @@ export default function OrdersPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[clamp(120px,calc(50%-0.5rem),200px)]">
+              <SelectTrigger className="w-full sm:w-[clamp(120px,15vw,200px)] text-[clamp(0.8rem,3vw,0.875rem)]">
                 <SelectValue placeholder="Type: All" />
               </SelectTrigger>
               <SelectContent>
@@ -75,8 +87,8 @@ export default function OrdersPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[clamp(120px,calc(50%-0.5rem),200px)]">
-                <SelectValue placeholder="Payment status: All" />
+              <SelectTrigger className="w-full sm:w-[clamp(120px,15vw,200px)] text-[clamp(0.8rem,3vw,0.875rem)]">
+                <SelectValue placeholder="Payment status" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All</SelectItem>
@@ -86,7 +98,7 @@ export default function OrdersPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[clamp(120px,calc(50%-0.5rem),200px)]">
+              <SelectTrigger className="w-full sm:w-[clamp(120px,15vw,200px)] text-[clamp(0.8rem,3vw,0.875rem)]">
                 <SelectValue placeholder="Channels" />
               </SelectTrigger>
               <SelectContent>
@@ -97,7 +109,7 @@ export default function OrdersPage() {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[clamp(120px,calc(50%-0.5rem),200px)]">
+              <SelectTrigger className="w-full sm:w-[clamp(120px,15vw,200px)] text-[clamp(0.8rem,3vw,0.875rem)]">
                 <SelectValue placeholder="Order sources" />
               </SelectTrigger>
               <SelectContent>
@@ -111,13 +123,13 @@ export default function OrdersPage() {
         </div>
 
         {/* Empty state - center on all screens */}
-        <div className="flex flex-col items-center justify-center min-h-[400px] border rounded-lg p-4 md:p-8 text-center">
-          <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
-            <ShoppingCart className="w-8 h-8 text-muted-foreground" />
+        <div className="flex flex-col items-center justify-center min-h-[clamp(300px,50vh,400px)] border rounded-lg p-4 md:p-8 text-center">
+          <div className="w-[clamp(48px,10vw,64px)] h-[clamp(48px,10vw,64px)] bg-muted rounded-full flex items-center justify-center mb-4">
+            <ShoppingCart className="w-[clamp(24px,5vw,32px)] h-[clamp(24px,5vw,32px)] text-muted-foreground" />
           </div>
-          <h2 className="text-xl font-semibold mb-2">Online Orders</h2>
-          <p className="text-muted-foreground mb-4 max-w-md">
-            This is where you'll manage all orders.
+          <h2 className="text-[clamp(1.1rem,4vw,1.25rem)] font-semibold mb-2">Online Orders</h2>
+          <p className="text-muted-foreground mb-4 max-w-md text-[clamp(0.875rem,3vw,1rem)]">
+            This is where you&apos;ll manage all orders.
           </p>
         </div>
       </div>

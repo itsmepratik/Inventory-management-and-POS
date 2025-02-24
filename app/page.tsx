@@ -7,6 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 
+// Add cache configuration
+export const dynamic = 'force-dynamic'
+export const revalidate = 3600 // Revalidate every hour
+export const fetchCache = 'force-cache'
+
 export default function HomePage() {
   const [selectedStore, setSelectedStore] = useState("store1")
 
@@ -38,11 +43,19 @@ export default function HomePage() {
         <div className="grid gap-6">
           <section>
             <h2 className="text-lg font-semibold mb-4">Key metrics</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <MetricCard title="Net Sales" value="$12,345.67" comparison="+15.2% from last week" />
-              <MetricCard title="Gross sales" value="$15,678.90" comparison="+12.8% from last week" />
-              <MetricCard title="Transactions" value="234" comparison="+5.7% from last week" />
-              <MetricCard title="Average net sale" value="$52.76" comparison="+8.9% from last week" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <MetricCard 
+                title="Net Sales" 
+                value="$12,345.67" 
+                comparison="+15.2% from last week"
+                link="/sales-info" 
+              />
+              <MetricCard 
+                title="Net Profits" 
+                value="$4,567.89" 
+                comparison="+18.5% from last week"
+                link="/sales-info" 
+              />
             </div>
           </section>
 
@@ -93,9 +106,10 @@ interface MetricCardProps {
   title: string
   value: string
   comparison: string
+  link?: string
 }
 
-function MetricCard({ title, value, comparison }: MetricCardProps) {
+function MetricCard({ title, value, comparison, link }: MetricCardProps) {
   return (
     <Card className="flex flex-col">
       <CardHeader>
@@ -103,7 +117,14 @@ function MetricCard({ title, value, comparison }: MetricCardProps) {
       </CardHeader>
       <CardContent className="flex-1 flex flex-col justify-between">
         <div className="text-2xl font-bold truncate">{value}</div>
-        <div className="text-sm text-muted-foreground truncate">{comparison}</div>
+        <div className="flex justify-between items-center mt-2">
+          <div className="text-sm text-muted-foreground truncate">{comparison}</div>
+          {link && (
+            <a href={link} className="text-sm text-blue-500 hover:text-blue-700 hover:underline">
+              More details
+            </a>
+          )}
+        </div>
       </CardContent>
     </Card>
   )

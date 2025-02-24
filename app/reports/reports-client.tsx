@@ -30,15 +30,14 @@ const ReportCard = dynamic(() => import("./report-card"), {
 
 export default function ReportsClient() {
   const { currentUser } = useUser()
-
-  if (currentUser?.role === "staff") {
-    return <div className="text-center py-8">You don't have permission to access this page.</div>
-  }
-
   const [selectedReport, setSelectedReport] = useState("sales")
-  const { messages, append, isLoading, error } = useChat()
+  const { messages, append, isLoading } = useChat()
   const { toast } = useToast()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+
+  if (currentUser?.role === "staff") {
+    return <div className="text-center py-8">You don&apos;t have permission to access this page.</div>
+  }
 
   const generateReport = async () => {
     try {
@@ -246,22 +245,11 @@ export default function ReportsClient() {
           </Button>
         </div>
       )}
-
-      {/* Loading State */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center">
-          <div className="flex flex-col items-center gap-2">
-            <RefreshCcw className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-sm font-medium">Generating report...</p>
-          </div>
-        </div>
-      )}
     </div>
   )
 
   return (
     <div className="h-full">
-      {/* Show different layouts based on screen size */}
       <div className="hidden md:block h-full">
         <DesktopLayout />
       </div>
